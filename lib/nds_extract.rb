@@ -5,11 +5,11 @@ pp directors_database
 
 def directors_totals(source)
   result = {}
-  director_index = 0
-  while director_index < source.size do
-    director = source[director_index]
+  row_index = 0
+  while row_index < source.size do
+    director = source[row_index]
     result[director[:name]] = gross_for_director(director)
-    director_index += 1
+    row_index += 1
   end
   result
 end
@@ -29,24 +29,23 @@ end
 def list_of_directors(source)
   directors = [] 
   row_index = 0 
-  director_name = source[row_index][:name]
   while row_index < source.length do 
-    directors << director_name
+    directors << source[row_index][:name] 
     row_index += 1 
   end
   directors 
 end
 
-def total_gross(source)
+def total_gross(source) 
   grand_total = 0 
   row_index = 0 
-  director_gross = directors_totals(source)
-  director_name = list_of_directors[row_index]
   while row_index < source.length do
-    list_of_directors[row_index] = director_gross[director_name]
-    grand_total += list_of_directors[row_index]
-    row_index +1 
+    director_name = list_of_directors(source)[row_index]
+    grand_total += directors_totals(source)[director_name]
+    row_index += 1
   end
-  grand_total
+  puts grand_total
 end
+
+total_gross(directors_database)
 
