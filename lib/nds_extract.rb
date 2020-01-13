@@ -44,7 +44,7 @@ def total_gross(source)
     grand_total += directors_totals(source)[director_name]
     row_index += 1
   end
-  puts grand_total
+  return grand_total
 end
 
 total_gross(directors_database)
